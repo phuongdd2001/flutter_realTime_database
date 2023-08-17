@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'addnote.dart';
@@ -7,7 +8,17 @@ import 'editnote.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  if (kIsWeb) {
+    await Firebase.initializeApp(
+        options: FirebaseOptions(
+          apiKey: "AIzaSyB_1JiSSJ5kRKzGajCXg5IdJyi0PKo1kiY",
+          appId: "1:957892027188:android:99182be32bb3fb0384bb61",
+          messagingSenderId: "957892027188",
+          projectId: "flutterrealdb",
+        ));
+  } else {
+    await Firebase.initializeApp();
+  }
   runApp(MyApp());
 }
 
